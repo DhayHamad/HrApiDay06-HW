@@ -1,8 +1,11 @@
 package org.example.models;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@XmlRootElement
 public class Employees {
 
     private int employeesId;
@@ -31,6 +34,10 @@ public class Employees {
         this.phoneNumber = phoneNumber;
         this.hireDate = hireDate;
         this.salary = salary;
+    }
+
+    public Employees() {
+
     }
 
     public int getEmployeesId() {
@@ -93,7 +100,7 @@ public class Employees {
     public String toString() {
         return "Employees{" +
                 "employeesId=" + employeesId +
-                ", farstName='" + firstName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +

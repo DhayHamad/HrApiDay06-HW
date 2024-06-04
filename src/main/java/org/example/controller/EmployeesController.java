@@ -1,7 +1,9 @@
 package org.example.controller;
 
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import org.example.dao.EmployeesDAO;
+import org.example.dto.EmployeeFilterDto;
 import org.example.models.Employees;
 
 import java.util.ArrayList;
@@ -12,9 +14,15 @@ public class EmployeesController {
     EmployeesDAO dao = new EmployeesDAO();
 
     @GET
-    public ArrayList<Employees> selectAllEmployees(){
+    @Produces ({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public ArrayList<Employees> selectAllEmployees(
+          // @QueryParam("salary") Integer salary,
+          // @QueryParam("limit") Integer limit,
+          // @QueryParam("offset") int offset
+          @BeanParam EmployeeFilterDto filter
+    ){
         try {
-            return dao.selectAllEmployees();
+            return dao.selectAllEmployees(filter);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -63,5 +71,22 @@ public class EmployeesController {
             throw new RuntimeException(e);
         }
     }
+   /* @GET
+    public ArrayList<Employees> getAllEmployees(@PathParam("empId") Integer empId) {
+        System.out.println(empId);
+        ArrayList<Employees> employees = new ArrayList<>();
+        employees.add(new Employees());
+        employees.add(new Employees());
+        employees.add(new Employees());
+        employees.add(new Employees());
+        return employees;
+    }
 
+    @POST
+    public void insertEmployee(@PathParam("empId") Integer empId, Employees emp) {
+
+        System.out.println(empId);
+        System.out.println(emp);
+    }
+*/
 }
